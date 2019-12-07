@@ -25,12 +25,12 @@ fct_cross <- function(.f, ..., sep = ":", keep_empty = FALSE, preserve_orders = 
   }
 
   .data <- lapply(tibble::tibble(.f, !!!flist), check_factor)
-  newf <- rlang::invoke(paste, .data, sep = sep)
+  newf <- rlang::exec(paste, .data, sep = sep)
 
   if (keep_empty) {
     all_levels <- lapply(.data, levels)
-    factor(newf, levels = rlang::invoke(paste,
-      rlang::invoke(expand.grid, all_levels),
+    factor(newf, levels = rlang::exec(paste,
+      rlang::exec(expand.grid, all_levels),
       sep = sep
     ))
   } else {
