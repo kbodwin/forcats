@@ -16,7 +16,7 @@
 #' fct_cross(fruit, colour)
 #' fct_cross(fruit, colour, eaten)
 #' fct_cross(fruit, colour, keep_empty = TRUE)
-fct_cross <- function(.f, ..., sep = ":", keep_empty = FALSE) {
+fct_cross <- function(.f, ..., sep = ":", keep_empty = FALSE, preserve_orders = FALSE) {
   .f <- check_factor(.f)
 
   flist <- rlang::list2(...)
