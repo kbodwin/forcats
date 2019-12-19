@@ -24,7 +24,8 @@ fct_cross <- function(.f, ..., sep = ":", keep_empty = FALSE, preserve_orders = 
     return(.f)
   }
 
-  .data <- lapply(tibble::tibble(.f, !!!flist), check_factor)
+  .data <- suppressWarnings(tibble::tibble(.f, !!!flist, .name_repair = "universal"))
+  .data <- lapply(.data, check_factor)
   newf <- rlang::exec(paste, .f, !!!flist, sep = sep)
 
   if (keep_empty) {
